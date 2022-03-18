@@ -1,3 +1,52 @@
 * {
     background-color: gray;
 }
+
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+.thirds{
+    text-align: center;
+    width: 100%;
+}
+
+.leftAlign {
+    display: inline-block;
+    vertical-align: top;
+    width: 20%;
+    margin: 0 auto;
+}
+
+.centerGrid {
+    display: inline-block;
+    vertical-align: top;
+    width: 25%;
+}
+
+.rightAlign {
+    display: inline-block;
+    vertical-align: top;
+    width: 20%;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    padding: 20px 30px 40px 30px;
+    gap: 2px;
+    background-color: #104D4D;
+
+}
+
+.grid > div {
+    background-color: #205C5A;
+    padding: 7px 4px;
+}
+
+button {
+    width: 100%;
+    height: 100%;
+}
