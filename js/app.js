@@ -10,5 +10,44 @@ const btnNames = btnIDs.map(function(el) {
     return el.toLocaleUpperCase();
 })
 
- console.log(btnNames);
- console.log(btnIDs);
+const enemyButtonsIDs = [];
+addHalfArray(btnIDs, enemyButtonsIDs, 0, (btnIDs.length / 2));
+const enemyButtonsNames = [];
+addHalfArray(btnNames, enemyButtonsNames, 0, (btnIDs.length / 2));
+const playerButtonsIDs = [];
+addHalfArray(btnIDs, playerButtonsIDs, (btnIDs.length / 2), btnIDs.length);
+const playerButtonsNames = [];
+addHalfArray(btnNames, playerButtonsNames, (btnIDs.length / 2), btnIDs.length);
+
+
+enableDisableAllButtons(true);
+enableDisableEnemyButtons(false);
+enableDisablePlayerButtons(false);
+
+
+const confirm = document.querySelector('#confirm');
+
+
+function enableDisableAllButtons(bool) {
+    btnIDs.forEach(function(item) {
+        document.getElementById(item).disabled = bool;
+    });
+};
+
+function enableDisablePlayerButtons(bool) {
+    playerButtonsIDs.forEach(function(item) {
+        document.getElementById(item).disabled = bool;
+    });
+};
+
+function enableDisableEnemyButtons(bool) {
+    enemyButtonsIDs.forEach(function(item) {
+        document.getElementById(item).disabled = bool;
+    });
+};
+
+function addHalfArray(oldArray, newArray, startPoint, endPoint) {
+    for (let i = startPoint; i < endPoint; i++) {
+        newArray.push(oldArray[i]);
+    };
+};

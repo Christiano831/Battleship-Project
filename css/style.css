@@ -1,5 +1,5 @@
 * {
-    background-color: gray;
+    font-style: normal;
 }
 
 .title {
@@ -49,4 +49,26 @@
 button {
     width: 100%;
     height: 100%;
+    background-color: blue;
+}
+
+.enemy{
+    background-color: red;
+}
+.enemy > button {
+    background-color: red;
+}
+
+#confirm {
+    background-color: green;
+    color: white;
+    font-size: 30px;
+}
+
+.special {
+    background-color: red;
+}
+
+.miss {
+    background-color: gray;
 }
