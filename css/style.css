@@ -72,3 +72,11 @@ button {
 .miss {
     background-color: gray;
 }
+
+.playerPiece {
+    background-color: lime;
+}
+
+#startGame {
+    background-color: yellow;
+}
