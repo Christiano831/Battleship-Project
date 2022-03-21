@@ -29,42 +29,67 @@ confirm.addEventListener('click', function() {
     const start = document.querySelector('.start');
     start.innerText = 'Are you ready to start playing?';
     let begin = document.querySelector('#confirm');
-    begin.innerText = 'START';
-    begin.disabled = true;
     begin.parentNode.removeChild(begin);
     phase = 1;
     if(phase === 1){
         let plyBtn = document.querySelectorAll('.playerBtn');
         plyBtn.forEach(function(btn) {
             btn.addEventListener('click', function(e) {
-                if (phase === 6) {
-                    
-                    begin.disabled = false;
+                if (e.target.classList.contains('playerPiece') || (phase >= 6)) {
                     return;
                 }
-                else if (e.target.classList.contains('playerPiece')) {
-                    return;
-                }
+                
                 else {
                     e.target.classList.add('playerPiece');
                     console.log('CLICKKKKKKK')
-                    phase++;
-                    if (phase === 6) {
-                        const play = document.createElement('button');
-                        play.id = 'startGame';
-                        play.innerHTML = 'LETS GOOOOO';
-                        const lastDiv = document.querySelector('.start');
-                        lastDiv.appendChild(play);
-                    }
+                    phase++;   
                 }
-            })
+                if (phase === 6) {
+                    const play = document.createElement('button');
+                    play.id = 'startGame';
+                    play.innerHTML = 'LETS GOOOOO';
+                    const lastDiv = document.querySelector('.start');
+                    lastDiv.appendChild(play);
+                    phase = 7;
+                    //play = document.querySelector('#startGame');
+                    play.addEventListener('click', function() {
+                        play.parentNode.removeChild(play);
+                        start.innerText = 'Let the Game Begin!!!';
+                        let turn = 0;
+                        if(phase === 7) {
+                            console.log('let the game begin!!!');
+                                //if(turn % 2 === 0) {
+                                    let enemyField = document.querySelectorAll('.enemyBtn');
+                                    enemyField.forEach(function(btn) {
+                                        btn.addEventListener('click', function(event) {
+                                            if (event.target.classList.contains('enemyPiece') || (turn >= 25)) {
+                                                return;
+                                            }
+                                            
+                                            else {
+                                                event.target.classList.add('enemyPiece');
+                                                console.log('you clicked on the enemy side');
+                                                console.log(turn);
+                                                checkPlayerSide();
+
+                                                //console.log(randomAnswer);
+                                                turn++; 
+
+                                            }
+                                        }, {once: true});
+                                    })
+                                    console.log('player turn');
+                                    //turn++;
+                                //}
+                        }
+                        return;
+                    })
+                }
+            }, {once: true});
         })
     }
     
-    console.log(phase)
 });
-
-
 
 function enableDisableAllButtons(bool) {
     btnIDs.forEach(function(item) {
@@ -89,3 +114,22 @@ function addHalfArray(oldArray, newArray, startPoint, endPoint) {
         newArray.push(oldArray[i]);
     };
 };
+
+
+
+
+function checkPlayerSide() {
+    let randomChoice = playerButtonsIDs[Math.floor(Math.random()*playerButtonsIDs.length)];
+    let randomComputerChoice = document.querySelector(`#${randomChoice}`);
+    if(randomComputerChoice.classList.contains('shot')) {
+        checkPlayerSide();
+    }
+    else if(randomComputerChoice.classList.contains('playerPiece')) {
+        console.log('Computer hit a boat!! It goes again!');
+        randomComputerChoice.classList.add('shot');
+        checkPlayerSide();
+    }
+    else {
+        randomComputerChoice.classList.add('shot');
+    }
+}

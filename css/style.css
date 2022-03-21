@@ -1,10 +1,27 @@
 * {
     font-style: normal;
+    
+}
+
+html {
+    background: url('../images/WaterDS.png');
+    background-size: cover;
+}
+
+.png {
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .title {
     display: flex;
     justify-content: center;
+    
+}
+
+h1 {
+    background-color: aqua;
+    
 }
 
 .thirds{
@@ -17,6 +34,7 @@
     vertical-align: top;
     width: 20%;
     margin: 0 auto;
+    background-color: aqua;
 }
 
 .centerGrid {
@@ -30,6 +48,7 @@
     vertical-align: top;
     width: 20%;
     margin: 0 auto;
+    background-color: aqua;
 }
 
 .grid {
@@ -75,6 +94,10 @@ button {
 
 .playerPiece {
     background-color: lime;
+}
+
+.enemyPiece {
+    background-color: red;
 }
 
 #startGame {
