@@ -1,120 +1,122 @@
 * {
-    font-style: normal;
-    
+  font-style: normal;
 }
 
 html {
-    background: url('../images/WaterDS.png');
-    background-size: cover;
+  background: url("../images/WaterDS.png");
+  background-size: cover;
 }
 
 .png {
-    max-height: 100%;
-    max-width: 100%;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .title {
-    display: flex;
-    justify-content: center;
-    
+  display: flex;
+  justify-content: center;
 }
 
 h1 {
-    background-color: aqua;
-    
+  background-color: aqua;
 }
 
-.thirds{
-    text-align: center;
-    width: 100%;
+.thirds {
+  text-align: center;
+  width: 100%;
 }
 
 .leftAlign {
-    display: inline-block;
-    vertical-align: top;
-    width: 20%;
-    margin: 0 auto;
-    background-color: aqua;
+  display: inline-block;
+  vertical-align: top;
+  width: 20%;
+  margin: 0 auto;
+  background-color: aqua;
 }
 
 .centerGrid {
-    display: inline-block;
-    vertical-align: top;
-    width: 25%;
+  display: inline-block;
+  vertical-align: top;
+  width: 25%;
 }
 
 .rightAlign {
-    display: inline-block;
-    vertical-align: top;
-    width: 20%;
-    margin: 0 auto;
-    background-color: aqua;
+  display: inline-block;
+  vertical-align: top;
+  width: 20%;
+  margin: 0 auto;
+  background-color: aqua;
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    padding: 20px 30px 40px 30px;
-    gap: 2px;
-    background-color: #104D4D;
-
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  padding: 20px 30px 40px 30px;
+  gap: 2px;
+  background-color: #104d4d;
 }
 
 .grid > div {
-    background-color: #205C5A;
-    padding: 7px 4px;
+  background-color: #205c5a;
+  padding: 7px 4px;
 }
 
 button {
-    width: 100%;
-    height: 100%;
-    background-color: blue;
+  width: 100%;
+  height: 100%;
+  background-color: blue;
 }
 
-.enemy{
-    background-color: red;
+.enemy {
+  background-color: red;
 }
 .enemy > button {
-    background-color: red;
+  background-color: red;
 }
 
 #confirm {
-    background-color: green;
-    color: white;
-    font-size: 30px;
+  background-color: green;
+  color: white;
+  font-size: 30px;
 }
 
 .special {
-    background-color: red;
+  background-color: red;
 }
 
 .miss {
-    background-color: gray;
+  background-color: gray;
 }
 
 .playerPiece {
-    background-color: lime;
+  background-color: lime;
 }
 
 .enemyPiece {
-    background-color: yellow;
+  background-color: yellow;
 }
 
 #startGame {
-    background-color: yellow;
+  background-color: yellow;
 }
 
 .shot {
-    background-color: gray;
+  background-color: gray;
 }
 .hitPlayer {
-    background-color: red;
+  background-color: red;
 }
 
 .shotOnEnemy {
-    background-color: orange;
+  background-color: orange;
 }
 
 .hitEnemy {
-    background-color: red;
+  background-color: red;
+}
+
+#redo {
+  background-color: green;
+  color: white;
+  font-size: 30px;
 }

@@ -60,7 +60,13 @@ confirm.addEventListener('click', function() {
                             // console.log('let the game begin!!!');
                                 //let enemyField = document.querySelectorAll('.enemyBtn');
                                 //enemyField.forEach(function(btn) {
-                                    playerTurn();
+                                    let enemyField = document.querySelectorAll('.enemyBtn');
+                                    enemyField.forEach(function(btn) {
+                                        btn.addEventListener('click', playerTurn)
+                                            //playerTurn();
+                                        //}, {once: true});
+                                    })
+
                                     // btn.addEventListener('click', function(event) {
                                     //     if (event.target.classList.contains('shotOnEnemy') || (turn >= 25)) {
                                     //         return;
@@ -148,8 +154,9 @@ function enemyTurn() {
         info.innerText = 'Oh well! it seems as though the computer won this time!';
         const start = document.querySelector('.start');
         start.innerText = 'Do you want to play again?';
-        enableDisableAllButtons(true);
-        return;
+        enableDisablePlayerButtons(true);
+        enableDisableEnemyButtons(true);
+        replayButton();
     }
     else if(randomComputerChoice.classList.contains('shot')) {
         console.log('oops computer already hit that tho')
@@ -158,38 +165,49 @@ function enemyTurn() {
     else if(randomComputerChoice.classList.contains('playerPiece')) {
         //const info = document.querySelector('.info');
         //info.innerText = 'Computer hit a boat and was able to go more than once!'
-        // console.log('Computer hit a boat!! It goes again!');
+         console.log('Computer hit a boat!! It goes again!');
         randomComputerChoice.classList.add('shot');
         randomComputerChoice.classList.add('hitPlayer');
 
 //NEED TO REMOVE RANDOM VALUE FROM ARRAY
+        // for (let i = 0; i < playerButtonsIDs.length; i++) {
+        //     if (playerButtonsIDs[i] === randomChoice) {
+        //         playerButtonsIDs.splice(i, 1);
+        //     }
+        // }
 
         enemyTurn();
     }
     else {
         randomComputerChoice.classList.add('shot');
+        console.log('computer made a move');
 
 //NEED TO REMOVE RANDOM VALUE FROM ARRAY
+        // for (let i = 0; i < playerButtonsIDs.length; i++) {
+        //     if (playerButtonsIDs[i] === randomChoice) {
+        //         playerButtonsIDs.splice(i, 1);
+        //     }
+        // }
 
-        playerTurn();
+        playerTurn;
         //const info = document.querySelector('.info');
         //info.innerText = 'Computer missed a hit, this is your chance!'
     }
 }
 
-function playerTurn() {
-    let enemyField = document.querySelectorAll('.enemyBtn');
-    enemyField.forEach(function(btn) {
-        btn.addEventListener('click', function(event) {
+function playerTurn(event) {
+    // let enemyField = document.querySelectorAll('.enemyBtn');
+    // enemyField.forEach(function(btn) {
+    //     btn.addEventListener('click', function(event) {
              if (event.target.classList.contains('shotOnEnemy')) {
-                 playerTurn();
+                 playerTurn;
              }    
              else {
                 event.target.classList.add('shotOnEnemy');
                 if (event.target.classList.contains('enemyPiece')) {
                     event.target.classList.add('hitEnemy');
                     let playerPiecesLost = document.getElementsByClassName('hitEnemy').length;
-                    // console.log(playerPiecesLost);
+                     console.log(playerPiecesLost);
                     if (playerPiecesLost === 5) {
                         const info = document.querySelector('.info');
                         info.innerText = 'Nice job! you were able to beat the computer!!';
@@ -197,16 +215,27 @@ function playerTurn() {
                         start.innerText = 'Do you want to play again?';
                         enableDisablePlayerButtons(true);
                         enableDisableEnemyButtons(true);
+                        replayButton();
                         return;
                     }
-                    playerTurn();
+                    playerTurn;
                 }
                 else {
                     enemyTurn();
                 }
                 // console.log('you clicked on the enemy side');
             }
-        }, {once: true});
-    })
+    //     }, {once: true});
+    // })
 }
 
+function replayButton() {
+    const redo = document.createElement('button');
+    redo.id = 'redo';
+    redo.innerHTML = 'Lets do that again!';
+    const lastDiv = document.querySelector('.start');
+    lastDiv.appendChild(redo);
+    redo.addEventListener('click', function() {
+        location.reload(true);
+    })
+}
