@@ -21,7 +21,6 @@ let phase = 0;
 enableDisableAllButtons(false);
 const confirm = document.querySelector('#confirm');
 confirm.addEventListener('click', function() {
-    //enableDisablePlayerButtons(false);
     const how = document.querySelector('.how');
     how.innerText = '';
     const info = document.querySelector('.info');
@@ -41,7 +40,7 @@ confirm.addEventListener('click', function() {
                 
                 else {
                     e.target.classList.add('playerPiece');
-                    console.log('CLICKKKKKKK')
+                    // console.log('CLICKKKKKKK')
                     phase++;   
                 }
                 if (phase === 6) {
@@ -53,34 +52,40 @@ confirm.addEventListener('click', function() {
                     phase = 7;
                     //play = document.querySelector('#startGame');
                     play.addEventListener('click', function() {
+                        enemyBoatGenerator();
                         play.parentNode.removeChild(play);
                         start.innerText = 'Let the Game Begin!!!';
                         let turn = 0;
                         if(phase === 7) {
-                            console.log('let the game begin!!!');
-                                //if(turn % 2 === 0) {
-                                    let enemyField = document.querySelectorAll('.enemyBtn');
-                                    enemyField.forEach(function(btn) {
-                                        btn.addEventListener('click', function(event) {
-                                            if (event.target.classList.contains('enemyPiece') || (turn >= 25)) {
-                                                return;
-                                            }
-                                            
-                                            else {
-                                                event.target.classList.add('enemyPiece');
-                                                console.log('you clicked on the enemy side');
-                                                console.log(turn);
-                                                checkPlayerSide();
-
-                                                //console.log(randomAnswer);
-                                                turn++; 
-
-                                            }
-                                        }, {once: true});
-                                    })
-                                    console.log('player turn');
-                                    //turn++;
-                                //}
+                            // console.log('let the game begin!!!');
+                                //let enemyField = document.querySelectorAll('.enemyBtn');
+                                //enemyField.forEach(function(btn) {
+                                    playerTurn();
+                                    // btn.addEventListener('click', function(event) {
+                                    //     if (event.target.classList.contains('shotOnEnemy') || (turn >= 25)) {
+                                    //         return;
+                                    //     }    
+                                    //     else {
+                                    //         event.target.classList.add('shotOnEnemy');
+                                    //         if (event.target.classList.contains('enemyPiece')) {
+                                    //             event.target.classList.add('hitEnemy');
+                                    //             let playerPiecesLost = document.getElementsByClassName('hitEnemy').length;
+                                    //             // console.log(playerPiecesLost);
+                                    //             if (playerPiecesLost === 5) {
+                                    //                 info.innerText = 'Nice job! you were able to beat the computer!!';
+                                    //                 start.innerText = 'Do you want to play again?';
+                                    //                 enableDisableAllButtons(true);
+                                    //                 return;
+                                    //             }
+                                    //         }
+                                    //         // console.log('you clicked on the enemy side');
+                                    //         // console.log(turn);
+                                    //         enemyTurn();
+                                    //         turn++; 
+                                    //     }
+                                    // }, {once: true});
+                                //})
+                            // console.log('player turn');
                         }
                         return;
                     })
@@ -115,21 +120,93 @@ function addHalfArray(oldArray, newArray, startPoint, endPoint) {
     };
 };
 
+function enemyBoatGenerator() {
+    let randomChoice = enemyButtonsIDs[Math.floor(Math.random()*enemyButtonsIDs.length)];
+    let randomComputerChoice = document.querySelector(`#${randomChoice}`);
+    let enemyPiecesPlaced = document.getElementsByClassName('enemyPiece').length;
+    if (enemyPiecesPlaced === 5) {
+        return;
+    }
+    else if(randomComputerChoice.classList.contains('enemyPiece')) {
+        enemyBoatGenerator();
+    }
+    else {
+        randomComputerChoice.classList.add('enemyPiece');
+        enemyBoatGenerator();
+    }
+}
 
 
 
-function checkPlayerSide() {
+function enemyTurn() {
     let randomChoice = playerButtonsIDs[Math.floor(Math.random()*playerButtonsIDs.length)];
     let randomComputerChoice = document.querySelector(`#${randomChoice}`);
-    if(randomComputerChoice.classList.contains('shot')) {
-        checkPlayerSide();
+    let enemyPiecesLost = document.getElementsByClassName('hitPlayer').length;
+    // console.log(enemyPiecesLost);
+    if (enemyPiecesLost === 5) {
+        const info = document.querySelector('.info');
+        info.innerText = 'Oh well! it seems as though the computer won this time!';
+        const start = document.querySelector('.start');
+        start.innerText = 'Do you want to play again?';
+        enableDisableAllButtons(true);
+        return;
+    }
+    else if(randomComputerChoice.classList.contains('shot')) {
+        console.log('oops computer already hit that tho')
+        enemyTurn();
     }
     else if(randomComputerChoice.classList.contains('playerPiece')) {
-        console.log('Computer hit a boat!! It goes again!');
+        //const info = document.querySelector('.info');
+        //info.innerText = 'Computer hit a boat and was able to go more than once!'
+        // console.log('Computer hit a boat!! It goes again!');
         randomComputerChoice.classList.add('shot');
-        checkPlayerSide();
+        randomComputerChoice.classList.add('hitPlayer');
+
+//NEED TO REMOVE RANDOM VALUE FROM ARRAY
+
+        enemyTurn();
     }
     else {
         randomComputerChoice.classList.add('shot');
+
+//NEED TO REMOVE RANDOM VALUE FROM ARRAY
+
+        playerTurn();
+        //const info = document.querySelector('.info');
+        //info.innerText = 'Computer missed a hit, this is your chance!'
     }
 }
+
+function playerTurn() {
+    let enemyField = document.querySelectorAll('.enemyBtn');
+    enemyField.forEach(function(btn) {
+        btn.addEventListener('click', function(event) {
+             if (event.target.classList.contains('shotOnEnemy')) {
+                 playerTurn();
+             }    
+             else {
+                event.target.classList.add('shotOnEnemy');
+                if (event.target.classList.contains('enemyPiece')) {
+                    event.target.classList.add('hitEnemy');
+                    let playerPiecesLost = document.getElementsByClassName('hitEnemy').length;
+                    // console.log(playerPiecesLost);
+                    if (playerPiecesLost === 5) {
+                        const info = document.querySelector('.info');
+                        info.innerText = 'Nice job! you were able to beat the computer!!';
+                        const start = document.querySelector('.start');
+                        start.innerText = 'Do you want to play again?';
+                        enableDisablePlayerButtons(true);
+                        enableDisableEnemyButtons(true);
+                        return;
+                    }
+                    playerTurn();
+                }
+                else {
+                    enemyTurn();
+                }
+                // console.log('you clicked on the enemy side');
+            }
+        }, {once: true});
+    })
+}
+

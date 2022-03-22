@@ -97,9 +97,24 @@ button {
 }
 
 .enemyPiece {
-    background-color: red;
+    background-color: yellow;
 }
 
 #startGame {
     background-color: yellow;
+}
+
+.shot {
+    background-color: gray;
+}
+.hitPlayer {
+    background-color: red;
+}
+
+.shotOnEnemy {
+    background-color: orange;
+}
+
+.hitEnemy {
+    background-color: red;
 }
