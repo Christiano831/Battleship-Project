@@ -37,7 +37,7 @@ h1 {
 .centerGrid {
   display: inline-block;
   vertical-align: top;
-  width: 40%;
+  width: 31%;
 }
 
 .rightAlign {
@@ -50,15 +50,17 @@ h1 {
 
 .grid {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-  padding: 20px 30px 40px 30px;
-  gap: 2px;
+  grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px ;
+  padding: 20px 30px 20px 30px;
+  gap: 0px;
   background-color: #104d4d;
 }
 
 .grid > div {
   background-color: #205c5a;
-  padding: 7px 4px;
+  width: 40px;
+  height: 40px;
+  padding: 0px 0px;
 }
 
 button {
@@ -129,31 +131,36 @@ button {
 }
 .boat1 {
     cursor: move;
-    width: 10%;
+    width: 60px;
+    height: 20px;
     background-color: lime;
     
 }
 .boat2 {
     cursor: move;
-    width: 20%;
+    width: 80px;
+    height: 20px;
     background-color: yellow;
     
 }
 .boat3 {
     cursor: move;
-    width: 20%;
+    width: 80px;
+    height: 20px;
     background-color: blue;
     
 }
 .boat4 {
     cursor: move;
-    width: 30%;
+    width: 120px;
+    height: 20px;
     background-color: red;
     
 }
 .boat5 {
     cursor: move;
-    width: 30%;
+    width: 160px;
+    height: 20px;
     background-color: purple;
     
 }

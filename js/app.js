@@ -9,6 +9,9 @@ const btnIDs = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'b1
  'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10',
  's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 't1', 't2', 't3', 't4', 't5', 't6', 't7', 't8', 't9', 't10' ];
 
+const rows = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't']
+const columns = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+
 const btnNames = btnIDs.map(function(el) {
     return el.toLocaleUpperCase();
 })
@@ -22,6 +25,8 @@ addHalfArray(btnIDs, playerButtonsIDs, (btnIDs.length / 2), btnIDs.length);
 const playerButtonsNames = [];
 addHalfArray(btnNames, playerButtonsNames, (btnIDs.length / 2), btnIDs.length);
 let phase = 0;
+
+
 
 enableDisableAllButtons(false);
 const confirm = document.querySelector('#confirm');
@@ -57,7 +62,11 @@ confirm.addEventListener('click', function() {
                     phase = 19;
                     //play = document.querySelector('#startGame');
                     play.addEventListener('click', function() {
-                        enemyBoatGenerator();
+                        enemyBoatGen(5);
+                        enemyBoatGen(4);
+                        enemyBoatGen(3);
+                        enemyBoatGen(3);
+                        enemyBoatGen(2);
                         play.parentNode.removeChild(play);
                         start.innerText = 'Let the Game Begin!!!';
                         let turn = 0;
@@ -130,6 +139,79 @@ function addHalfArray(oldArray, newArray, startPoint, endPoint) {
         newArray.push(oldArray[i]);
     };
 };
+
+function enemyBoatGen(boatSize) {
+    let rowColumn = Math.floor(Math.random()*2);
+    let goodBoat = true;
+    if (rowColumn === 0) {
+        let randomRow = rows[Math.floor(Math.random()*(rows.length/2))]
+        let randomColumn = columns[Math.floor(Math.random()*(columns.length-(boatSize-1)))];
+        let boatArray = [randomRow+randomColumn];
+        for (let i = 1; i < boatSize; i++) {
+            randomColumn = nextChar(randomColumn)
+            if (randomColumn === nextChar('9')) {
+                boatArray.push(randomRow+'10')
+            }
+            else{
+                boatArray.push(randomRow+randomColumn);
+            }
+        }
+        //const finalBoatArray = [];
+        boatArray.forEach(function(item) {
+            let idChecker = document.querySelector(`#${item}`);
+            if(idChecker.classList.contains('enemyPiece')) {
+                goodBoat = false;
+            }
+        })
+        if (goodBoat === true) {
+            boatArray.forEach(function(item) {
+                let idChecker = document.querySelector(`#${item}`);
+                idChecker.classList.add('enemyPiece')
+            })
+            console.log(boatArray);
+        }
+        else {enemyBoat1Gen(boatSize)}
+    }
+    else {
+        let randomColumn = columns[Math.floor(Math.random()*columns.length)];
+        let randomRow = rows[Math.floor(Math.random()*((rows.length/2)-(boatSize-1)))];
+        let boatArray = [randomRow+randomColumn];
+        for (let i = 1; i < boatSize; i++) {
+            randomRow = nextChar(randomRow)
+            if (randomRow === nextChar('9')) {
+                boatArray.push(randomRow+'10')
+            }
+            else{
+                boatArray.push(randomRow+randomColumn);
+            }
+        }
+        boatArray.forEach(function(item) {
+            let idChecker = document.querySelector(`#${item}`);
+            if(idChecker.classList.contains('enemyPiece')) {
+                goodBoat = false;
+            }
+        })
+        if (goodBoat === true) {
+            boatArray.forEach(function(item) {
+                let idChecker = document.querySelector(`#${item}`);
+                idChecker.classList.add('enemyPiece')
+            })
+            console.log(boatArray);
+        }
+        else {enemyBoat1Gen(boatSize)}
+    }
+    // let randomChoice = enemyButtonsIDs[Math.floor(Math.random()*enemyButtonsIDs.length)];
+    // let randomComputerChoice = document.querySelector(`#${randomChoice}`);
+    // let enemyPiecesPlaced = document.getElementsByClassName('enemyPiece').length;
+    // if (randomComputerChoice.classList.contains('enemyPiece')) {
+    //     enemyBoat1Gen();
+    // }
+
+}
+
+function nextChar(character) {
+    return String.fromCharCode(character.charCodeAt(0) + 1);
+}
 
 function enemyBoatGenerator() {
     let randomChoice = enemyButtonsIDs[Math.floor(Math.random()*enemyButtonsIDs.length)];
