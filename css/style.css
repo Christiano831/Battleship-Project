@@ -37,7 +37,7 @@ h1 {
 .centerGrid {
   display: inline-block;
   vertical-align: top;
-  width: 25%;
+  width: 40%;
 }
 
 .rightAlign {
@@ -50,7 +50,7 @@ h1 {
 
 .grid {
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   padding: 20px 30px 40px 30px;
   gap: 2px;
   background-color: #104d4d;
@@ -65,6 +65,7 @@ button {
   width: 100%;
   height: 100%;
   background-color: blue;
+  color: white;
 }
 
 .enemy {
@@ -119,4 +120,40 @@ button {
   background-color: green;
   color: white;
   font-size: 30px;
+}
+
+
+.boats {
+    display: flex;
+    flex-direction: column;
+}
+.boat1 {
+    cursor: move;
+    width: 10%;
+    background-color: lime;
+    
+}
+.boat2 {
+    cursor: move;
+    width: 20%;
+    background-color: yellow;
+    
+}
+.boat3 {
+    cursor: move;
+    width: 20%;
+    background-color: blue;
+    
+}
+.boat4 {
+    cursor: move;
+    width: 30%;
+    background-color: red;
+    
+}
+.boat5 {
+    cursor: move;
+    width: 30%;
+    background-color: purple;
+    
 }
