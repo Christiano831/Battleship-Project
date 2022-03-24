@@ -27,7 +27,6 @@ addHalfArray(btnNames, playerButtonsNames, (btnIDs.length / 2), btnIDs.length);
 let phase = 0;
 
 
-
 enableDisableAllButtons(false);
 const confirm = document.querySelector('#confirm');
 confirm.addEventListener('click', function() {
@@ -170,7 +169,7 @@ function enemyBoatGen(boatSize) {
             })
             console.log(boatArray);
         }
-        else {enemyBoat1Gen(boatSize)}
+        else {enemyBoatGen(boatSize)}
     }
     else {
         let randomColumn = columns[Math.floor(Math.random()*columns.length)];
@@ -198,7 +197,7 @@ function enemyBoatGen(boatSize) {
             })
             console.log(boatArray);
         }
-        else {enemyBoat1Gen(boatSize)}
+        else {enemyBoatGen(boatSize)}
     }
     // let randomChoice = enemyButtonsIDs[Math.floor(Math.random()*enemyButtonsIDs.length)];
     // let randomComputerChoice = document.querySelector(`#${randomChoice}`);
@@ -211,6 +210,10 @@ function enemyBoatGen(boatSize) {
 
 function nextChar(character) {
     return String.fromCharCode(character.charCodeAt(0) + 1);
+}
+
+function prevChar(character) {
+    return String.fromCharCode(character.charCodeAt(0) - 1);
 }
 
 function enemyBoatGenerator() {
@@ -231,6 +234,225 @@ function enemyBoatGenerator() {
 
 
 
+let startingPos = -1;
+function enemyAI() {
+    let enemyPiecesLost = document.getElementsByClassName('hitPlayer').length;
+    // console.log(enemyPiecesLost);
+    if (enemyPiecesLost === 17) {
+        const info = document.querySelector('.info');
+        info.innerText = 'Oh well! it seems as though the computer won this time!';
+        const start = document.querySelector('.start');
+        start.innerText = 'Do you want to play again?';
+        enableDisablePlayerButtons(true);
+        enableDisableEnemyButtons(true);
+        replayButton();
+    }
+    else {
+        //playerButtonsIDs.forEach(function(item) {
+        //let startingPos = 0;
+        startingPos++;
+        //console.log(startingPos)
+        //for (let i = 0; i < playerButtonsIDs.length; i++) {
+            let item = playerButtonsIDs[startingPos];
+            //console.log(item)
+            if (!document.querySelector(`#${item}`).classList.contains('surrounded')) {
+                //console.log('checking for surrounded');
+                //console.log(item);
+            ///}
+            //if (!document.querySelector(`#${item}`).classList.contains('surrounded')) {
+                if(document.querySelector(`#${item}`).classList.contains('hitPlayer')) {
+                    console.log('piece not surrounded activating AI')
+                    const idSplit = item.split('');
+                    if (idSplit[2] === '0') {
+                        let firstPos = (prevChar(idSplit[0])) + '10';
+                        let first = document.querySelector(`#${firstPos}`);
+                        let secondPos = (idSplit[0]) + '11';
+                        let second = document.querySelector(`#${secondPos}`);
+                        let thirdPos = (nextChar(idSplit[0])) + '10';
+                        let third = document.querySelector(`#${thirdPos}`);
+                        let fourthPos = (idSplit[0]) + '11';
+                        let fourth = document.querySelector(`#${fourthPos}`);
+                        if (first) {
+                            firstTry(first, firstPos, second, secondPos, third, thirdPos, fourth, fourthPos, item)
+                        }
+                    }
+                    else if (idSplit[1] === '9') {
+                        let firstPos = (prevChar(idSplit[0])) + (idSplit[1]);
+                        let first = document.querySelector(`#${firstPos}`);
+                        let secondPos = (idSplit[0]) + '10';
+                        let second = document.querySelector(`#${secondPos}`);
+                        let thirdPos = (nextChar(idSplit[0])) + (idSplit[1]);
+                        let third = document.querySelector(`#${thirdPos}`);
+                        let fourthPos = (idSplit[0]) + (prevChar(idSplit[1]));
+                        let fourth = document.querySelector(`#${fourthPos}`);
+                        if (first) {
+                            firstTry(first, firstPos, second,  secondPos, third, thirdPos, fourth, fourthPos, item)
+                        }
+                    }
+                    else {
+                        let firstPos = (prevChar(idSplit[0])) + (idSplit[1]);
+                        let first = document.querySelector(`#${firstPos}`);
+                        let secondPos = (idSplit[0]) + (nextChar(idSplit[1]));
+                        let second = document.querySelector(`#${secondPos}`);
+                        let thirdPos = (nextChar(idSplit[0])) + (idSplit[1]);
+                        let third = document.querySelector(`#${thirdPos}`);
+                        let fourthPos = (idSplit[0]) + (prevChar(idSplit[1]));
+                        let fourth = document.querySelector(`#${fourthPos}`);
+                        if (first) {
+                            firstTry(first, firstPos, second,  secondPos, third, thirdPos, fourth, fourthPos, item)
+                        }
+                    }
+                }
+                else {
+                    if (startingPos === 99) {
+                        enemyTurn();
+                        startingPos = -1;
+                    }
+                    else {
+                        enemyAI();
+                    }
+                    
+                    //enemyTurn();
+                    //break;
+                }
+            }
+            else {
+                if (startingPos === 99) {
+                    enemyTurn();
+                    startingPos = -1;
+                }
+                else {
+                    enemyAI();
+                }
+            }
+        //}
+        //})
+    }
+}
+
+
+function firstTry(first, firstPos, second, secondPos, third, thirdPos, fourth, fourthPos, item) {
+    console.log('checking above')
+    console.log(firstPos);
+    if (document.getElementById(`${firstPos}`)) {
+        if (first.classList.contains('enemyBtn')) {
+            secondTry(third, thirdPos, fourth, fourthPos, item);
+        }
+        else if (first.classList.contains('shot')) {
+            secondTry(second, secondPos, third, thirdPos, fourth, fourthPos, item);
+        }
+        else if (first.classList.contains('playerPiece')) {
+            first.classList.add('shot')
+            first.classList.add('hitPlayer')
+            startingPos = -1;
+            enemyAI();
+        }
+        else if (first.classList.contains('playerBtn')) {
+            first.classList.add('shot');
+            startingPos = -1;
+            playerTurn;
+        }
+        else {
+            secondTry(second, secondPos, third, thirdPos, fourth, fourthPos, item);
+        }
+    }
+    else {
+        secondTry(second, secondPos, third, thirdPos, fourth, fourthPos, item)
+    }
+}
+function secondTry(second, secondPos, third, thirdPos, fourth, fourthPos, item) {
+    console.log('checking to the right')
+    console.log(secondPos);
+    if (document.getElementById(`${secondPos}`)) {
+        if (second.classList.contains('shot')) {
+            thirdTry(third, thirdPos, fourth, fourthPos, item);
+        }
+        else if (second.classList.contains('playerPiece')) {
+            second.classList.add('shot')
+            second.classList.add('hitPlayer')
+            startingPos = -1;
+            enemyAI();
+        }
+        else if (second.classList.contains('playerBtn')) {
+            second.classList.add('shot');
+            startingPos = -1;
+            playerTurn;
+        }
+        else {
+            thirdTry(third, thirdPos, fourth, fourthPos, item);
+        }
+    }
+    else {
+        thirdTry(third, thirdPos, fourth, fourthPos, item)
+    }
+}
+function thirdTry(third, thirdPos, fourth, fourthPos, item) {
+    console.log('checking below')
+    console.log(thirdPos);
+    if (document.getElementById(`${thirdPos}`)) {
+        if (third.classList.contains('shot')) {
+            fourthTry(fourth, fourthPos, item);
+        }
+        else if (third.classList.contains('enemyBtn')){
+            fourthTry(fourth, fourthPos, item);
+        }
+        else if (third.classList.contains('playerPiece')) {
+            third.classList.add('shot')
+            third.classList.add('hitPlayer')
+            startingPos = -1;
+            enemyAI();
+        }
+        else if (third.classList.contains('playerBtn')) {
+            third.classList.add('shot');
+            startingPos = -1;
+            playerTurn;
+        }
+        else {
+            fourthTry(fourth, fourthPos, item);
+        }
+    }
+    else {
+        fourthTry(fourth, fourthPos, item)
+    }
+}
+function fourthTry(fourth, fourthPos, item) {
+    console.log('checking to the left')
+    console.log(fourthPos);
+    if (document.getElementById(`${fourthPos}`)) {
+        if (fourth.classList.contains('shot')) {
+            document.querySelector(`#${item}`).classList.add('surrounded');
+            startingPos = -1;
+            enemyAI();
+        }
+        else if (!fourth.classList.contains('playerBtn')) {
+            document.querySelector(`#${item}`).classList.add('surrounded');
+            startingPos = -1;
+            enemyAI();
+        }
+        else if (fourth.classList.contains('playerPiece')) {
+            fourth.classList.add('shot')
+            fourth.classList.add('hitPlayer')
+            startingPos = -1;
+            enemyAI();
+        }
+        else if (fourth.classList.contains('playerBtn')) {
+            fourth.classList.add('shot');
+            document.querySelector(`#${item}`).classList.add('surrounded');
+            startingPos = -1;
+            playerTurn;
+        }
+        else {
+            enemyTurn();
+        }
+    }
+    else {
+        document.querySelector(`#${item}`).classList.add('surrounded');
+        enemyTurn();
+    }
+}
+
+
+
 function enemyTurn() {
     let randomChoice = playerButtonsIDs[Math.floor(Math.random()*playerButtonsIDs.length)];
     let randomComputerChoice = document.querySelector(`#${randomChoice}`);
@@ -246,7 +468,7 @@ function enemyTurn() {
         replayButton();
     }
     else if(randomComputerChoice.classList.contains('shot')) {
-        console.log('oops computer already hit that tho')
+        //console.log('oops computer already hit that tho')
         enemyTurn();
     }
     else if(randomComputerChoice.classList.contains('playerPiece')) {
@@ -255,27 +477,13 @@ function enemyTurn() {
          console.log('Computer hit a boat!! It goes again!');
         randomComputerChoice.classList.add('shot');
         randomComputerChoice.classList.add('hitPlayer');
-
-//NEED TO REMOVE RANDOM VALUE FROM ARRAY
-        // for (let i = 0; i < playerButtonsIDs.length; i++) {
-        //     if (playerButtonsIDs[i] === randomChoice) {
-        //         playerButtonsIDs.splice(i, 1);
-        //     }
-        // }
-
-        enemyTurn();
+        startingPos = -1;
+        enemyAI();
     }
     else {
         randomComputerChoice.classList.add('shot');
         console.log('computer made a move');
-
-//NEED TO REMOVE RANDOM VALUE FROM ARRAY
-        // for (let i = 0; i < playerButtonsIDs.length; i++) {
-        //     if (playerButtonsIDs[i] === randomChoice) {
-        //         playerButtonsIDs.splice(i, 1);
-        //     }
-        // }
-
+        startingPos = -1
         playerTurn;
         //const info = document.querySelector('.info');
         //info.innerText = 'Computer missed a hit, this is your chance!'
@@ -308,7 +516,7 @@ function playerTurn(event) {
                     playerTurn;
                 }
                 else {
-                    enemyTurn();
+                    enemyAI();
                 }
                 // console.log('you clicked on the enemy side');
             }
