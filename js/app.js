@@ -266,11 +266,11 @@ function enemyAI() {
                     if (idSplit[2] === '0') {
                         let firstPos = (prevChar(idSplit[0])) + '10';
                         let first = document.querySelector(`#${firstPos}`);
-                        let secondPos = (idSplit[0]) + '11';
+                        let secondPos = (idSplit[0]) + '10';
                         let second = document.querySelector(`#${secondPos}`);
                         let thirdPos = (nextChar(idSplit[0])) + '10';
                         let third = document.querySelector(`#${thirdPos}`);
-                        let fourthPos = (idSplit[0]) + '11';
+                        let fourthPos = (idSplit[0]) + '9';
                         let fourth = document.querySelector(`#${fourthPos}`);
                         if (first) {
                             firstTry(first, firstPos, second, secondPos, third, thirdPos, fourth, fourthPos, item)
@@ -298,8 +298,9 @@ function enemyAI() {
                         let third = document.querySelector(`#${thirdPos}`);
                         let fourthPos = (idSplit[0]) + (prevChar(idSplit[1]));
                         let fourth = document.querySelector(`#${fourthPos}`);
+                        console.log(firstPos, secondPos, thirdPos, fourthPos)
                         if (first) {
-                            firstTry(first, firstPos, second,  secondPos, third, thirdPos, fourth, fourthPos, item)
+                            firstTry(first, firstPos, second, secondPos, third, thirdPos, fourth, fourthPos, item)
                         }
                     }
                 }
@@ -316,8 +317,12 @@ function enemyAI() {
                     //break;
                 }
             }
+            else if (startingPos < 99) {
+                //startingPos++;
+                enemyAI();
+            }
             else {
-                if (startingPos === 99) {
+                if (startingPos >= 99) {
                     enemyTurn();
                     startingPos = -1;
                 }
@@ -336,7 +341,7 @@ function firstTry(first, firstPos, second, secondPos, third, thirdPos, fourth, f
     console.log(firstPos);
     if (document.getElementById(`${firstPos}`)) {
         if (first.classList.contains('enemyBtn')) {
-            secondTry(third, thirdPos, fourth, fourthPos, item);
+            secondTry(second, secondPos, third, thirdPos, fourth, fourthPos, item);
         }
         else if (first.classList.contains('shot')) {
             secondTry(second, secondPos, third, thirdPos, fourth, fourthPos, item);
@@ -439,7 +444,7 @@ function fourthTry(fourth, fourthPos, item) {
             fourth.classList.add('shot');
             document.querySelector(`#${item}`).classList.add('surrounded');
             startingPos = -1;
-            playerTurn;
+            enemyAI();
         }
         else {
             enemyTurn();
@@ -447,7 +452,7 @@ function fourthTry(fourth, fourthPos, item) {
     }
     else {
         document.querySelector(`#${item}`).classList.add('surrounded');
-        enemyTurn();
+        enemyAI();
     }
 }
 
