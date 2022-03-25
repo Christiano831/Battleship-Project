@@ -50,7 +50,7 @@ h1 {
   vertical-align: top;
   width: 20%;
   margin: 0px 10px 0px 30px;
-  
+
   border-radius: 15px;
 }
 
@@ -63,7 +63,7 @@ h2 {
 
 .grid {
   display: grid;
-  grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px ;
+  grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
   padding: 20px 30px 20px 30px;
   gap: 0px;
   background-color: #072158;
@@ -102,11 +102,11 @@ button {
 }
 
 #confirm:hover {
-    box-shadow: 0 20px 40px 0 rgba(0,0,0,0.44), 0 17px 50px 0 rgba(0,0,0,0.39);
-    background-color: #072158;
-    color: white;
+  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.44),
+    0 17px 50px 0 rgba(0, 0, 0, 0.39);
+  background-color: #072158;
+  color: white;
 }
-
 
 .special {
   background-color: red;
@@ -125,18 +125,19 @@ button {
 }
 
 #startGame {
-    margin-top: 30px;
-    background-color: white;
-    color: #0a141e;
-    font-size: 30px;
-    border-radius: 50px;
-    transition: all 1s;
-    cursor: pointer;
+  margin-top: 30px;
+  background-color: white;
+  color: #0a141e;
+  font-size: 30px;
+  border-radius: 50px;
+  transition: all 1s;
+  cursor: pointer;
 }
 #startGame:hover {
-    box-shadow: 0 20px 40px 0 rgba(0,0,0,0.44), 0 17px 50px 0 rgba(0,0,0,0.39);
-    background-color: #072158;
-    color: white;
+  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.44),
+    0 17px 50px 0 rgba(0, 0, 0, 0.39);
+  background-color: #072158;
+  color: white;
 }
 
 .shot {
@@ -155,57 +156,52 @@ button {
 }
 
 #redo {
-    margin-top: 30px;
-    background-color: white;
-    color: #0a141e;
-    font-size: 30px;
-    border-radius: 50px;
-    transition: all 1s;
-    cursor: pointer;
+  margin-top: 30px;
+  background-color: white;
+  color: #0a141e;
+  font-size: 30px;
+  border-radius: 50px;
+  transition: all 1s;
+  cursor: pointer;
 }
 #redo:hover {
-    box-shadow: 0 20px 40px 0 rgba(0,0,0,0.44), 0 17px 50px 0 rgba(0,0,0,0.39);
-    background-color: #072158;
-    color: white;
+  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.44),
+    0 17px 50px 0 rgba(0, 0, 0, 0.39);
+  background-color: #072158;
+  color: white;
 }
-
 
 .boats {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .boat1 {
-    cursor: move;
-    width: 60px;
-    height: 20px;
-    background-color: lime;
-    
+  cursor: move;
+  width: 60px;
+  height: 20px;
+  background-color: lime;
 }
 .boat2 {
-    cursor: move;
-    width: 80px;
-    height: 20px;
-    background-color: yellow;
-    
+  cursor: move;
+  width: 80px;
+  height: 20px;
+  background-color: yellow;
 }
 .boat3 {
-    cursor: move;
-    width: 80px;
-    height: 20px;
-    background-color: blue;
-    
+  cursor: move;
+  width: 80px;
+  height: 20px;
+  background-color: blue;
 }
 .boat4 {
-    cursor: move;
-    width: 120px;
-    height: 20px;
-    background-color: red;
-    
+  cursor: move;
+  width: 120px;
+  height: 20px;
+  background-color: red;
 }
 .boat5 {
-    cursor: move;
-    width: 160px;
-    height: 20px;
-    background-color: purple;
-    
+  cursor: move;
+  width: 160px;
+  height: 20px;
+  background-color: purple;
 }
