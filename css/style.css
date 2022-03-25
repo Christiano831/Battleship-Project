@@ -2,9 +2,10 @@
   font-style: normal;
 }
 
-html {
+body {
   background: url("../images/WaterDS.png");
   background-size: cover;
+  color: white;
 }
 
 .png {
@@ -18,7 +19,9 @@ html {
 }
 
 h1 {
-  background-color: aqua;
+  background-color: #072158;
+  padding: 30px;
+  border-radius: 15px;
 }
 
 .thirds {
@@ -29,9 +32,11 @@ h1 {
 .leftAlign {
   display: inline-block;
   vertical-align: top;
-  width: 20%;
-  margin: 0 auto;
-  background-color: aqua;
+  width: 25%;
+  margin: 0px 30px 0px 10px;
+  background-color: #072158;
+  padding: 10px 20px 10px 20px;
+  border-radius: 15px;
 }
 
 .centerGrid {
@@ -44,8 +49,16 @@ h1 {
   display: inline-block;
   vertical-align: top;
   width: 20%;
-  margin: 0 auto;
-  background-color: aqua;
+  margin: 0px 10px 0px 30px;
+  
+  border-radius: 15px;
+}
+
+h2 {
+  margin: 0px 0px 0px 0px;
+  background-color: #072158;
+  border-radius: 15px;
+  padding: 10px;
 }
 
 .grid {
@@ -53,7 +66,8 @@ h1 {
   grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px ;
   padding: 20px 30px 20px 30px;
   gap: 0px;
-  background-color: #104d4d;
+  background-color: #072158;
+  border-radius: 15px;
 }
 
 .grid > div {
@@ -66,8 +80,8 @@ h1 {
 button {
   width: 100%;
   height: 100%;
-  background-color: blue;
-  color: white;
+  background-color: #29b4ff;
+  color: #771c36;
 }
 
 .enemy {
@@ -78,10 +92,21 @@ button {
 }
 
 #confirm {
-  background-color: green;
-  color: white;
+  margin-top: 30px;
+  background-color: white;
+  color: #0a141e;
   font-size: 30px;
+  border-radius: 50px;
+  transition: all 1s;
+  cursor: pointer;
 }
+
+#confirm:hover {
+    box-shadow: 0 20px 40px 0 rgba(0,0,0,0.44), 0 17px 50px 0 rgba(0,0,0,0.39);
+    background-color: #072158;
+    color: white;
+}
+
 
 .special {
   background-color: red;
@@ -100,7 +125,18 @@ button {
 }
 
 #startGame {
-  background-color: yellow;
+    margin-top: 30px;
+    background-color: white;
+    color: #0a141e;
+    font-size: 30px;
+    border-radius: 50px;
+    transition: all 1s;
+    cursor: pointer;
+}
+#startGame:hover {
+    box-shadow: 0 20px 40px 0 rgba(0,0,0,0.44), 0 17px 50px 0 rgba(0,0,0,0.39);
+    background-color: #072158;
+    color: white;
 }
 
 .shot {
@@ -119,9 +155,18 @@ button {
 }
 
 #redo {
-  background-color: green;
-  color: white;
-  font-size: 30px;
+    margin-top: 30px;
+    background-color: white;
+    color: #0a141e;
+    font-size: 30px;
+    border-radius: 50px;
+    transition: all 1s;
+    cursor: pointer;
+}
+#redo:hover {
+    box-shadow: 0 20px 40px 0 rgba(0,0,0,0.44), 0 17px 50px 0 rgba(0,0,0,0.39);
+    background-color: #072158;
+    color: white;
 }
 
 

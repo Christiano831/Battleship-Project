@@ -33,7 +33,7 @@ confirm.addEventListener('click', function() {
     const how = document.querySelector('.how');
     how.innerText = '';
     const info = document.querySelector('.info');
-    info.innerText = 'Please choose a slot to place boat on your side of the map.';
+    info.innerText = 'Please choose the slots where you would like to place your boats in the lower grid. You can choose to have the boats horizontal or vertical. Just make sure you click the correct amount of slots for the boats.';
     const start = document.querySelector('.start');
     start.innerText = 'Are you ready to start playing?';
     let begin = document.querySelector('#confirm');
@@ -56,7 +56,7 @@ confirm.addEventListener('click', function() {
                     const play = document.createElement('button');
                     play.id = 'startGame';
                     play.innerHTML = 'LETS GOOOOO';
-                    const lastDiv = document.querySelector('.start');
+                    const lastDiv = document.querySelector('.rightAlign');
                     lastDiv.appendChild(play);
                     phase = 19;
                     //play = document.querySelector('#startGame');
@@ -79,32 +79,6 @@ confirm.addEventListener('click', function() {
                                             //playerTurn();
                                         //}, {once: true});
                                     })
-
-                                    // btn.addEventListener('click', function(event) {
-                                    //     if (event.target.classList.contains('shotOnEnemy') || (turn >= 25)) {
-                                    //         return;
-                                    //     }    
-                                    //     else {
-                                    //         event.target.classList.add('shotOnEnemy');
-                                    //         if (event.target.classList.contains('enemyPiece')) {
-                                    //             event.target.classList.add('hitEnemy');
-                                    //             let playerPiecesLost = document.getElementsByClassName('hitEnemy').length;
-                                    //             // console.log(playerPiecesLost);
-                                    //             if (playerPiecesLost === 5) {
-                                    //                 info.innerText = 'Nice job! you were able to beat the computer!!';
-                                    //                 start.innerText = 'Do you want to play again?';
-                                    //                 enableDisableAllButtons(true);
-                                    //                 return;
-                                    //             }
-                                    //         }
-                                    //         // console.log('you clicked on the enemy side');
-                                    //         // console.log(turn);
-                                    //         enemyTurn();
-                                    //         turn++; 
-                                    //     }
-                                    // }, {once: true});
-                                //})
-                            // console.log('player turn');
                         }
                         return;
                     })
@@ -199,13 +173,6 @@ function enemyBoatGen(boatSize) {
         }
         else {enemyBoatGen(boatSize)}
     }
-    // let randomChoice = enemyButtonsIDs[Math.floor(Math.random()*enemyButtonsIDs.length)];
-    // let randomComputerChoice = document.querySelector(`#${randomChoice}`);
-    // let enemyPiecesPlaced = document.getElementsByClassName('enemyPiece').length;
-    // if (randomComputerChoice.classList.contains('enemyPiece')) {
-    //     enemyBoat1Gen();
-    // }
-
 }
 
 function nextChar(character) {
@@ -533,7 +500,7 @@ function replayButton() {
     const redo = document.createElement('button');
     redo.id = 'redo';
     redo.innerHTML = 'Lets do that again!';
-    const lastDiv = document.querySelector('.start');
+    const lastDiv = document.querySelector('.rightAlign');
     lastDiv.appendChild(redo);
     redo.addEventListener('click', function() {
         location.reload(true);
